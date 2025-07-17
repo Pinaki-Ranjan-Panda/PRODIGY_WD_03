@@ -1,0 +1,248 @@
+:root {
+    --primary-color: #4a6bff;
+    --secondary-color: #ff6b6b;
+    --bg-gradient: linear-gradient(135deg, rgba(74, 107, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f8f9fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #333;
+}
+
+.container {
+    width: 100%;
+    max-width: 500px;
+    padding: 2rem;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 8px;
+    background: var(--bg-gradient);
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.icon-container {
+    display: flex;
+    align-items: center;
+    margin-right: 1rem;
+}
+
+.monoline-icon {
+    width: 40px;
+    height: 40px;
+    position: relative;
+    margin-right: 8px;
+}
+
+.circle {
+    width: 100%;
+    height: 100%;
+    border: 2px solid var(--primary-color);
+    border-radius: 50%;
+    position: absolute;
+}
+
+.x-shape {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.x-shape::before, .x-shape::after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 100%;
+    background-color: var(--secondary-color);
+    top: 0;
+    left: 50%;
+}
+
+.x-shape::before {
+    transform: translateX(-50%) rotate(45deg);
+}
+
+.x-shape::after {
+    transform: translateX(-50%) rotate(-45deg);
+}
+
+.icon-text {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+h1 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.game-controls {
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.game-mode {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+    gap: 0.5rem;
+}
+
+.mode-btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 20px;
+    background-color: #f0f0f0;
+    color: #666;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.mode-btn.active {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.status {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    font-weight: 500;
+    color: var(--primary-color);
+}
+
+.reset-btn {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    background-color: white;
+    color: #666;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.reset-btn:hover {
+    background-color: #f8f8f8;
+}
+
+.reset-btn i {
+    font-size: 0.8rem;
+}
+
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 10px;
+    aspect-ratio: 1/1;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.cell {
+    background-color: white;
+    border: 2px solid #eee;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    aspect-ratio: 1/1;
+    position: relative;
+}
+
+.cell:hover {
+    background-color: #f8f9fa;
+}
+
+.cell.x::before, .cell.x::after {
+    content: '';
+    position: absolute;
+    width: 70%;
+    height: 4px;
+    background-color: var(--primary-color);
+    top: 50%;
+    left: 50%;
+}
+
+.cell.x::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.cell.x::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.cell.o::before {
+    content: '';
+    position: absolute;
+    width: 60%;
+    height: 60%;
+    border: 4px solid var(--secondary-color);
+    border-radius: 50%;
+}
+
+.cell.winning-cell {
+    animation: pulse 1s infinite;
+    background-color: rgba(74, 107, 255, 0.1);
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 1.5rem;
+    }
+    
+    h1 {
+        font-size: 1.5rem;
+    }
+    
+    .game-board {
+        gap: 8px;
+    }
+    
+    .cell {
+        font-size: 2rem;
+    }
+}
